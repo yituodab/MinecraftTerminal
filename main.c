@@ -7,7 +7,6 @@ char * command = "cls";
 #else
 char * command = "clear";
 #endif
-
 int main(void){
   system(command);
   start();

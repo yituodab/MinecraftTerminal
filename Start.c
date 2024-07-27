@@ -19,6 +19,13 @@ int start(void){
     free(minecraft2);
     free(minecraft3);
     free(minecraftTerminal);*/
+    printf("1.Create new world\n");
+    printf("2.Join world\n");
+    printf("0.Exit\n");
+    scanf("%d",&input);
+    if(input == 0)start();
+    if(input == 1)printf("Testing...\n");
+    if(input == 2)return 0;
     return 0;
   }
 }

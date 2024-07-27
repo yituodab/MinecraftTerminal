@@ -39,5 +39,11 @@ struct Pos move(int input,int window_height,struct Pos pos,int map_size,struct M
       pos.minx += 1;
     }
   }
+  int j = window_height - pos.x;
+  while(j<window_height){
+    if(!map.map[pos.x][pos.y+1].noAir)
+    pos.y += 1;
+    j++;
+  }
   return pos;
 }

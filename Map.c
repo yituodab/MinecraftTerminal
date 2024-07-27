@@ -6,12 +6,12 @@
 #define WINDOW_HEIGHT 10
 #define BLOCK_TYPE_NUMBER 2
 #define MAP
-struct realmap{
+struct block{
 	bool noAir;
  	char * type;
 };
 struct Map{
-  struct realmap map[MAP_SIZE+1][WINDOW_HEIGHT+1];
+  struct block map[MAP_SIZE+1][WINDOW_HEIGHT+1];
 };
 struct Map addMap(int height,long seed){
   struct Map map;
@@ -39,7 +39,7 @@ struct Map addMap(int height,long seed){
   for(int p = 1;p<=100;p++){
     int px = rand()%MAP_SIZE+1;
     int py = rand()%WINDOW_HEIGHT+(WINDOW_HEIGHT-height);
-    if(map.map[px][py].noAir){
+    if(map.map[px][py].noAir && map.map[px][py].type == "石"){
       char * mineral;
       mineral = "铁";
       map.map[px][py].type = mineral;
