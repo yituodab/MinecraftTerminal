@@ -40,21 +40,20 @@ struct Pos move(int input,int window_height,struct Pos pos,int map_size,struct M
       pos.minx += 1;
     }
   }
-  int j = window_height - pos.x;
+  int j = 0;
   while(j<window_height){
     if(!map.map[pos.x][pos.y+1].noAir)
     pos.y += 1;
     j++;
   }
-  //Demolish Block
   
   return pos;
 }
 struct Map demolishBlock(int input,struct Pos pos,struct Map map){
   int w = 119;
   int s = 115;
-  int q = 81;
-  int e = 69;
+  int q = 113;
+  int e = 101;
   if(input == w)map.map[pos.x][pos.y-1].noAir = false;
   if(input == s)map.map[pos.x][pos.y+1].noAir = false;
   if(input == q)map.map[pos.x-1][pos.y].noAir = false;
