@@ -9,7 +9,7 @@ void render(int minx,int x,int y,int window_height,struct Map newmap){
         continue;
       }
       else if(newmap.map[lx][ly].noAir){
-        printf("石"/*,newmap.map[lx][ly].type*/);
+        printf("%s",newmap.map[lx][ly].type);
         continue;
       }
       else {
