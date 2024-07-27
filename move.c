@@ -9,12 +9,15 @@ struct Pos{
   int miny;
 };
 struct Pos move(int input,int window_height,struct Pos pos,int map_size,struct Map map){
+  //Move
   int w = 119;
   int s = 115;
   int a = 97;
   int d = 100;
-  if(input == w && pos.y > 1 && !map.map[pos.x][pos.y-1].noAir)pos.y -= 1;
-  if(input == s && pos.y < window_height && !map.map[pos.x][pos.y+1].noAir)pos.y += 1;
+  int q = 81;
+  int e = 69;
+  //if(input == w && pos.y > 1 && !map.map[pos.x][pos.y-1].noAir)pos.y -= 1;
+  //if(input == s && pos.y < window_height && !map.map[pos.x][pos.y+1].noAir)pos.y += 1;
   if(input == a && pos.x > 1){
   	if(!map.map[pos.x-1][pos.y].noAir){
     	pos.x -= 1;
@@ -45,5 +48,10 @@ struct Pos move(int input,int window_height,struct Pos pos,int map_size,struct M
     pos.y += 1;
     j++;
   }
+  //Demolish Block
+  if(input == w)map.map[pos.x][pos.y-1].noAir = false;
+  if(input == s)map.map[pos.x][pos.y+1].noAir = false;
+  if(input == q)map.map[pos.x-1][pos.y].noAir = false;
+  if(input == e)map.map[pos.x+1][pos.y].noAir = false;
   return pos;
 }

@@ -19,7 +19,7 @@ struct block{
 struct Map{
   struct block map[MAP_SIZE+1][WINDOW_HEIGHT+1];
 };
-struct Map addMap(int height,int seed){
+struct Map addWorld(int height,int seed){
   struct Map map;
   srand(seed);
   for(int i = 1;i<=MAP_SIZE*WINDOW_HEIGHT;i++){
