@@ -9,8 +9,7 @@ char * command = "clear";
 #endif
 int main(void){
   system(command);
-  int seed = start();
-  struct Map map = addWorld(7,seed);
+  struct Map map = start();
   struct Pos pos = {1,1,1,10};
   //struct Command command = {pos,map};
   int input;

@@ -2,10 +2,18 @@
 #include <time.h>
 #include <stdbool.h>
 #include <math.h>
+#include <unistd.h>
+#include <stdio.h>
+#include <string.h>
 #define MAP_SIZE 1100
 #define WINDOW_HEIGHT 10
 #define BLOCK_TYPE_NUMBER 2
 #define MAP
+#ifdef _WIN32
+char SAVES[100] = "saves\\";
+#else 
+char SAVES[100] = "saves/";
+#endif
 char * blockTypes[10]={
   "气",
   "石",
@@ -56,6 +64,19 @@ struct Map addWorld(int height,int seed){
   }
   return map;
 }
-void createMap(){
-
+void createWorld(struct Map map,char worldname[5]){
+  FILE * File;
+  strcat(SAVES,worldname);
+  if(access("saves",F_OK) == -1)system("mkdir saves");
+  File = fopen(SAVES,"w+");
+  /*for(int f = 1;f<=MAP_SIZE;f++){
+    for(int fy = 1;fy<=WINDOW_HEIGHT;fy++){
+      fputs((char)map.map[f][fy].type,File);
+      fputs(" ",File);
+      fputs((char)map.map[f][fy].noAir,File);
+      fputs("\n",File);
+    }
+  }*/
+  fwrite(&map,sizeof(map),1,File);
+  fclose(File);
 }
