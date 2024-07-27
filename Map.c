@@ -8,7 +8,7 @@
 #define MAP
 struct realmap{
 	bool noAir;
- 	char type;
+ 	char * type;
 };
 struct Map{
   struct realmap map[MAP_SIZE+1][WINDOW_HEIGHT+1];
@@ -40,7 +40,7 @@ struct Map addMap(int height,long seed){
     int px = rand()%MAP_SIZE+1;
     int py = rand()%WINDOW_HEIGHT+(WINDOW_HEIGHT-height);
     if(map.map[px][py].noAir){
-      char mineral;
+      char * mineral;
       mineral = "铁";
       map.map[px][py].type = mineral;
       map.map[px+1][py].type = mineral;
