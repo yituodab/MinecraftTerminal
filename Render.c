@@ -3,7 +3,7 @@
 void render(int minx,int x,int y,int window_height,struct Map newmap){
   if(x>window_height)minx+=1;
   for(int ly = 1;ly<=window_height;ly++){
-    for(int lx = minx;lx<=minx+window_height-1;lx++){
+    for(int lx = minx;lx<=minx+window_height-1 && lx < MAP_SIZE - 100;lx++){
       if(lx == x && ly == y){
         printf("\033[1;32m人\033[0m");
         continue;

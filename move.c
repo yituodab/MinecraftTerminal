@@ -10,10 +10,8 @@ struct Pos{
 };
 struct Pos move(int input,int window_height,struct Pos pos,int map_size,struct Map map){
   //Move
-  
   int a = 97;
   int d = 100;
-
   //if(input == w && pos.y > 1 && !map.map[pos.x][pos.y-1].noAir)pos.y -= 1;
   //if(input == s && pos.y < window_height && !map.map[pos.x][pos.y+1].noAir)pos.y += 1;
   if(input == a && pos.x > 1){
@@ -28,7 +26,7 @@ struct Pos move(int input,int window_height,struct Pos pos,int map_size,struct M
       pos.minx -= 1;
     }
   }
-  if(input == d && pos.x < map_size){
+  if(input == d && pos.x < map_size && map_size - pos.x >= 1){
     if(!map.map[pos.x+1][pos.y].noAir){
     	pos.x += 1;
     }
@@ -46,7 +44,6 @@ struct Pos move(int input,int window_height,struct Pos pos,int map_size,struct M
     pos.y += 1;
     j++;
   }
-  
   return pos;
 }
 struct Map demolishBlock(int input,struct Pos pos,struct Map map){

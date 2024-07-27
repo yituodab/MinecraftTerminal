@@ -2,12 +2,12 @@
 #include <time.h>
 #include <stdbool.h>
 #include <math.h>
-#define MAP_SIZE 1000
+#define MAP_SIZE 1100
 #define WINDOW_HEIGHT 10
 #define BLOCK_TYPE_NUMBER 2
 #define MAP
 char * blockTypes[10]={
-  "null",
+  "气",
   "石",
   "土",
   "铁"
@@ -17,7 +17,7 @@ struct block{
  	int type;
 };
 struct Map{
-  struct block map[MAP_SIZE+1][WINDOW_HEIGHT+1];
+  struct block map[MAP_SIZE+50][WINDOW_HEIGHT+1];
 };
 struct Map addWorld(int height,int seed){
   struct Map map;
