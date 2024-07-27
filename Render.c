@@ -5,7 +5,7 @@ void render(int minx,int x,int y,int window_height,struct Map newmap){
   for(int ly = 1;ly<=window_height;ly++){
     for(int lx = minx;lx<=minx+window_height-1;lx++){
       if(lx == x && ly == y){
-        printf("人");
+        printf("\033[1;32m人\033[0m");
         continue;
       }
       else if(newmap.map[lx][ly].noAir){

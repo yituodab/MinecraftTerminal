@@ -24,7 +24,12 @@ int start(void){
     printf("0.Exit\n");
     scanf("%d",&input);
     if(input == 0)start();
-    if(input == 1)printf("Testing...\n");
+    if(input == 1){
+      printf("Seed?\n");
+      int seed;
+      scanf("%d",&seed);
+      return 0;
+    }
     if(input == 2)return 0;
     return 0;
   }

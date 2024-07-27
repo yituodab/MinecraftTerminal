@@ -15,7 +15,7 @@ struct Map{
 };
 struct Map addMap(int height,long seed){
   struct Map map;
-  srand(time(0));
+  srand(seed);
   for(int i = 1;i<=MAP_SIZE*WINDOW_HEIGHT;i++){
     printf("Loading Map...\r");
     int x = rand()%MAP_SIZE+1;
