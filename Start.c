@@ -28,9 +28,9 @@ int start(void){
       printf("Seed?\n");
       int seed;
       scanf("%d",&seed);
-      return 0;
+      return seed;
     }
-    if(input == 2)return 0;
-    return 0;
+    if(input == 2)return 114514;
+    return 114514;
   }
 }
