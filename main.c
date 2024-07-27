@@ -18,6 +18,7 @@ int main(void){
     //RunCommand(input,command);
     system(command);
     pos = move(input,WINDOW_HEIGHT,pos,MAP_SIZE,map);
+    map = demolishBlock(input,pos,map);
   	render(pos.minx,pos.x,pos.y,WINDOW_HEIGHT,map);
   }
 }
