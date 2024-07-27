@@ -1,6 +1,12 @@
 #include "Render.c"
 #include "move.c"
+#include "Start.c"
 //#include "Command.c"
+#ifdef _WIN32
+char * command = "cls";
+#else
+char * command = "clear";
+#endif
 struct Map addMap(int height,long seed){
   struct Map map;
   srand(time(0));
@@ -39,12 +45,15 @@ struct Map addMap(int height,long seed){
   return map;
 }
 int main(void){
+  system(command);
+  start();
   struct Map map = addMap(7,114514);
   struct Pos pos = {1,1,1,10};
   //struct Command command = {pos,map};
   int input;
   for(;;input=getchar()){
     //RunCommand(input,command);
+    system(command);
     pos = move(input,WINDOW_HEIGHT,pos,MAP_SIZE,map);
   	render(pos.minx,pos.x,pos.y,WINDOW_HEIGHT,map);
   }
