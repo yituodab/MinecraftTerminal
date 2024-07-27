@@ -26,7 +26,7 @@ struct Pos move(int input,int window_height,struct Pos pos,int map_size,struct M
       pos.x -= 1;
       pos.y -= 1;
     }
-    if(pos.x >= 2 && pos.x - pos.minx <= 2){
+    if(pos.x >= 2 && pos.x - pos.minx <= 1){
       pos.minx -= 1;
     }
   }
