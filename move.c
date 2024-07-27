@@ -42,7 +42,7 @@ struct Pos move(int input,int window_height,struct Pos pos,int map_size,struct M
   }
   int j = 0;
   while(j<window_height){
-    if(!map.map[pos.x][pos.y+1].noAir)
+    if(!map.map[pos.x][pos.y+1].noAir && pos.y < window_height)
     pos.y += 1;
     j++;
   }
