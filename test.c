@@ -1,6 +1,6 @@
-#include <stdio.h>
+/*#include <stdio.h>
 #include <stdlib.h>
-#include <sys/stat.h>
+#include <dirent.h>
 int main(void){
   /*struct Test{
     int sb;
@@ -14,9 +14,24 @@ int main(void){
   fclose(file);*/
   /*char test[5];
   scanf("%s",test);
-  printf("%s",test);*/
-  int dir = opendir("bits");
-  char * sb = readdir(dir);
-  int ls = system("ls");
+  printf("%s",test);
+  DIR * dir = opendir("bits");
   printf("%d",ls);
+}*/
+//#include <sys/types.h>
+#include <dirent.h>
+#include <unistd.h>
+#include <stdio.h>
+
+int main(){
+DIR *dir;
+struct dirent *ptr;
+
+dir = opendir("bits");
+
+while((ptr = readdir(dir)) != NULL)
+printf("d_name: %s\n", ptr->d_name);
+
+closedir(dir);
+return 0;
 }

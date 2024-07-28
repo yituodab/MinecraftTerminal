@@ -95,7 +95,7 @@ void createWorld(struct Pos pos,struct Map map,char worldname[50]){
       fputs("\n",File);
     }
   }*/
-  fwrite(&readmap,sizeof(readmap),1,File);
+  fwrite(&readmap,1024*1024,1,File);
   fclose(File);
 }
 struct ReadMap ReadWorld(char worldname[50]){
@@ -103,8 +103,9 @@ struct ReadMap ReadWorld(char worldname[50]){
   FILE * file;
   strcat(SAVES,worldname);
   strcat(SAVES,data);
-  file = fopen(SAVES,"r+");
-  fread(&readmap,sizeof(readmap),1,file);
+  printf("%s",SAVES);
+  file = fopen(SAVES,"a+");
+  fread(&readmap,1024*1024,1,file);
   fclose(file);
   return readmap;
 }
