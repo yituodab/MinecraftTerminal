@@ -3,10 +3,16 @@
 #include <dirent.h>
 #include <unistd.h>
 //#include "move.c"
-char * minecraft1 ="||\\\\//|| || ||\\\\  || ||--- ||===| ||===|    /=\\   |------|";
-char * minecraft2 ="|| \\/ || || || \\\\ || ||--- ||     ||===|   /___\\     ||";
-char * minecraft3 ="||    || || ||  \\\\|| ||___ ||___| || \\\\_  /     \\    ||";
+char * minecraft1 ="||\\\\//|| || ||\\\\  || ||=== ||===| ||===|    /\\   ||===| |------|";
+char * minecraft2 ="|| \\/ || || || \\\\ || ||--- ||     ||===|   /__\\  ||===|    ||";
+char * minecraft3 ="||    || || ||  \\\\|| ||___ ||===| || \\\\_  /    \\ ||        ||";
 char * minecraftTerminal = "                    TERMINAL EDTION\033[0m";
+/*int main(void){
+  printf("\033[1m%s\n",minecraft1);
+  printf("%s\n",minecraft2);
+  printf("%s\n",minecraft3);
+  printf("%s\n",minecraftTerminal);
+}*/
 struct ReadMap start(void){
   char * worldlist[100+3];
   struct ReadMap readmap;
