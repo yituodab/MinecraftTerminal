@@ -8,6 +8,7 @@ char * minecraft2 ="|| \\/ || || || \\\\ || ||--- ||     ||===|   /___\\     ||"
 char * minecraft3 ="||    || || ||  \\\\|| ||___ ||___| || \\\\_  /     \\    ||";
 char * minecraftTerminal = "                    TERMINAL EDTION\033[0m";
 struct ReadMap start(void){
+  char * worldlist[100+3];
   struct ReadMap readmap;
   struct Pos pos = {1,1,1,10};
   printf("\033[1m%s\n",minecraft1);
@@ -56,39 +57,47 @@ struct ReadMap start(void){
       int i = 1;
       int l = 1;
 			while((ptr = readdir(dir)) != NULL){
-        //char p[50];
-        //sprintf(p,"%s",ptr->d_name);
+       // sprintf(p,"%s",ptr->d_name);
         if(i <= 2){
           i++;
           continue;
         }
 				printf("%d.%s\n", l, ptr->d_name);
+        worldlist[l] = ptr->d_name;
         i++;
         l++;
       }
-      printf("0.Exit");
+      //closedir(dir);
+      printf("0.Exit\n");
       fflush(stdout);
       //char list[50][100] = ptr->d_name;
       scanf("%d",&input);
-      if(input == 0)readmap = start();
-      else {
-      	int j = 1;
-        int o = 1;
-      	while((ptr = readdir(dir)) != NULL){
-        	if(j<=2){
-            j++;
-            continue;
-          }
-        	if(input == o){
-          	char Dir[50];
-     	    	sprintf(Dir,"%s",ptr->d_name);
-     	  		readmap = ReadWorld(Dir);
+      /*if(input == 0)readmap = start();
+      else {*/
+      //DIR * Dir;
+      //struct dirent * pt;
+      //Dir = opendir("saves");
+      //int j = 1;
+      //int o = 1;
+      	/*while((pt = readdir(dir)) != NULL){
+          printf("%d",o);
+          //exit(0);
+        	if(o+2 == input){
+          	char Name[50];
+     	    	sprintf(Name,"%s",pt->d_name);*/
+            char Name[50];
+            sprintf(Name,"%s",worldlist[input]);
+     	  		readmap = ReadWorld(Name);
      	    	return readmap;
-    	    }
+    	    /*}
         	j++;
           o++;
-      	}
-      }
+      	}*/
+        /*char world[50];
+        sprintf(world,"%s",worldlist[input]);
+        readmap = ReadWorld(world);
+        return readmap;*/
+      //}
       closedir(dir);
     }
   }
