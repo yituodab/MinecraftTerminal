@@ -2,12 +2,12 @@
 #ifndef MAP
 #include "Map.c"
 #endif
-struct Pos{
+/*struct Pos{
   int x;
   int y;
   int minx;
   int miny;
-};
+};*/
 struct Pos move(int input,int window_height,struct Pos pos,int map_size,struct Map map){
   //Move
   int a = 97;

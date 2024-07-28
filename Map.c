@@ -11,9 +11,19 @@
 #define MAP
 #ifdef _WIN32
 char SAVES[100] = "saves\\";
+char data[] = "\\worldData";
+char Mkdir[100] = "mkdir saves\\";
 #else 
 char SAVES[100] = "saves/";
+char data[] = "/worldData";
+char Mkdir[100] = "mkdir -p saves/";
 #endif
+struct Pos{
+  int x;
+  int y;
+  int minx;
+  int mint;
+};
 char * blockTypes[10]={
   "气",
   "石",
@@ -26,6 +36,10 @@ struct block{
 };
 struct Map{
   struct block map[MAP_SIZE+50][WINDOW_HEIGHT+1];
+};
+struct ReadMap{
+  struct Map map;
+  struct Pos pos;
 };
 struct Map addWorld(int height,int seed){
   struct Map map;
@@ -64,10 +78,14 @@ struct Map addWorld(int height,int seed){
   }
   return map;
 }
-void createWorld(struct Map map,char worldname[5]){
+void createWorld(struct Pos pos,struct Map map,char worldname[50]){
+  struct ReadMap readmap = {map,pos};
   FILE * File;
   strcat(SAVES,worldname);
+  strcat(SAVES,data);
+  strcat(Mkdir,worldname);
   if(access("saves",F_OK) == -1)system("mkdir saves");
+  system(Mkdir);
   File = fopen(SAVES,"w+");
   /*for(int f = 1;f<=MAP_SIZE;f++){
     for(int fy = 1;fy<=WINDOW_HEIGHT;fy++){
@@ -77,6 +95,16 @@ void createWorld(struct Map map,char worldname[5]){
       fputs("\n",File);
     }
   }*/
-  fwrite(&map,sizeof(map),1,File);
+  fwrite(&readmap,sizeof(readmap),1,File);
   fclose(File);
+}
+struct ReadMap ReadWorld(char worldname[50]){
+  struct ReadMap readmap;
+  FILE * file;
+  strcat(SAVES,worldname);
+  strcat(SAVES,data);
+  file = fopen(SAVES,"r+");
+  fread(&readmap,sizeof(readmap),1,file);
+  fclose(file);
+  return readmap;
 }

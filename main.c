@@ -9,8 +9,9 @@ char * command = "clear";
 #endif
 int main(void){
   system(command);
-  struct Map map = start();
-  struct Pos pos = {1,1,1,10};
+  struct ReadMap readmap = start();
+  struct Pos pos = readmap.pos;
+  struct Map map = readmap.map;
   //struct Command command = {pos,map};
   int input;
   for(;;input=getchar()){

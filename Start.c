@@ -1,11 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
+//#include "move.c"
 char * minecraft1 ="||\\\\//|| || ||\\\\  || ||--- ||===| ||===|    /=\\   |------|";
 char * minecraft2 ="|| \\/ || || || \\\\ || ||--- ||     ||===|   /___\\     ||";
 char * minecraft3 ="||    || || ||  \\\\|| ||___ ||___| || \\\\_  /     \\    ||";
 char * minecraftTerminal = "                    TERMINAL EDTION\033[0m";
-struct Map start(void){
-  struct Map map;
+struct ReadMap start(void){
+  struct ReadMap readmap;
+  struct Pos pos = {1,1,1,10};
   printf("\033[1m%s\n",minecraft1);
   printf("%s\n",minecraft2);
   printf("%s\n",minecraft3);
@@ -36,11 +38,17 @@ struct Map start(void){
         printf("Error:World name too long!");
         exit(0);
       }
-      map = addWorld(7,seed);
-      createWorld(map,worldname);
-      return map;
+      struct Map map = addWorld(7,seed);
+      createWorld(pos,map,worldname);
+      readmap.map = map;
+      readmap.pos = pos;
+      return readmap;
     }
-    if(input == 2)map = addWorld(7,114514);
+    if(input == 2){
+      struct Map map = addWorld(7,114514);
+      readmap.map = map;
+      readmap.pos = pos;
+    }
   }
-  return map;
+  return readmap;
 }
