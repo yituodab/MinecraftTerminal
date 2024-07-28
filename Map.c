@@ -51,18 +51,6 @@ struct Map addWorld(int height,int seed){
     map.map[x][y].noAir = true;
     if(y>=5)map.map[x][y].type = 1;
     else map.map[x][y].type = 2;
-    /*int type = rand()%BLOCK_TYPE_NUMBER+0;
-    switch(type){
-      case 1:
-        map.map[x][y].type = "石";
-        break;
-      case 2:
-        map.map[x][y].type = "土";
-        break;
-      default:
-      	map.map[x][y].type = "气";
-        break;
-    }*/
   }
   for(int p = 1;p<=100;p++){
     int px = rand()%MAP_SIZE+1;
@@ -87,15 +75,7 @@ void createWorld(struct Pos pos,struct Map map,char worldname[50]){
   if(access("saves",F_OK) == -1)system("mkdir saves");
   system(Mkdir);
   File = fopen(SAVES,"w+");
-  /*for(int f = 1;f<=MAP_SIZE;f++){
-    for(int fy = 1;fy<=WINDOW_HEIGHT;fy++){
-      fputs((char)map.map[f][fy].type,File);
-      fputs(" ",File);
-      fputs((char)map.map[f][fy].noAir,File);
-      fputs("\n",File);
-    }
-  }*/
-  fwrite(&readmap,1024*1024,1,File);
+  fwrite(&readmap,sizeof(readmap),1,File);
   fclose(File);
 }
 struct ReadMap ReadWorld(char worldname[50]){
@@ -105,7 +85,7 @@ struct ReadMap ReadWorld(char worldname[50]){
   strcat(SAVES,data);
   printf("%s",SAVES);
   file = fopen(SAVES,"a+");
-  fread(&readmap,1024*1024,1,file);
+  fread(&readmap,sizeof(readmap),1,file);
   fclose(file);
   return readmap;
 }

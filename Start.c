@@ -48,16 +48,12 @@ struct ReadMap start(void){
       return readmap;
     }
     if(input == 2){
-      /*struct Map map = addWorld(7,114514);
-      readmap.map = map;
-      readmap.pos = pos;*/
 			DIR *dir;
 			struct dirent *ptr;
       dir = opendir("saves");
       int i = 1;
       int l = 1;
 			while((ptr = readdir(dir)) != NULL){
-       // sprintf(p,"%s",ptr->d_name);
         if(i <= 2){
           i++;
           continue;
@@ -67,38 +63,17 @@ struct ReadMap start(void){
         i++;
         l++;
       }
-      //closedir(dir);
       printf("0.Exit\n");
       fflush(stdout);
-      //char list[50][100] = ptr->d_name;
       scanf("%d",&input);
-      /*if(input == 0)readmap = start();
-      else {*/
-      //DIR * Dir;
-      //struct dirent * pt;
-      //Dir = opendir("saves");
-      //int j = 1;
-      //int o = 1;
-      	/*while((pt = readdir(dir)) != NULL){
-          printf("%d",o);
-          //exit(0);
-        	if(o+2 == input){
-          	char Name[50];
-     	    	sprintf(Name,"%s",pt->d_name);*/
-            char Name[50];
-            sprintf(Name,"%s",worldlist[input]);
-     	  		readmap = ReadWorld(Name);
-     	    	return readmap;
-    	    /*}
-        	j++;
-          o++;
-      	}*/
-        /*char world[50];
-        sprintf(world,"%s",worldlist[input]);
-        readmap = ReadWorld(world);
-        return readmap;*/
-      //}
-      closedir(dir);
+      if(input == 0)readmap = start();
+      else {
+      	char Name[50];
+      	sprintf(Name,"%s",worldlist[input]);
+    	 	readmap = ReadWorld(Name);
+    	 	return readmap;
+    	  closedir(dir);
+      }
     }
   }
   return readmap;
