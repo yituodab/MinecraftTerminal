@@ -40,18 +40,20 @@ struct ReadMap start(void){
       printf("Seed?\n");
       int seed;
       scanf("%d",&seed);
-      char worldname[50];
+      char Worldname[50];
       printf("World name?\n");
-      scanf("%s",worldname);
-      if(strlen(worldname) > 50){
+      scanf("%s",Worldname);
+      if(strlen(Worldname) > 50){
         printf("Error:World name too long!");
         exit(0);
       }
       struct Map map = addWorld(7,seed);
-      createWorld(pos,map,worldname);
-      readmap.map = map;
+      createWorld(pos,map,Worldname);
+      struct ReadMap ReadmaP = {map,pos,Worldname};
+      /*readmap.map = map;
       readmap.pos = pos;
-      return readmap;
+      readmap.worldname = Worldname;
+      return readmap;*/
     }
     if(input == 2){
 			DIR *dir;
@@ -77,8 +79,8 @@ struct ReadMap start(void){
       	char Name[50];
       	sprintf(Name,"%s",worldlist[input]);
     	 	readmap = ReadWorld(Name);
+        closedir(dir);
     	 	return readmap;
-    	  closedir(dir);
       }
     }
   }

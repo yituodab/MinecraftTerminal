@@ -40,6 +40,7 @@ struct Map{
 struct ReadMap{
   struct Map map;
   struct Pos pos;
+  char worldname[50];
 };
 struct Map addWorld(int height,int seed){
   struct Map map;
@@ -67,7 +68,7 @@ struct Map addWorld(int height,int seed){
   return map;
 }
 void createWorld(struct Pos pos,struct Map map,char worldname[50]){
-  struct ReadMap readmap = {map,pos};
+  struct ReadMap readmap = {map,pos,worldname};
   FILE * File;
   strcat(SAVES,worldname);
   strcat(SAVES,data);
@@ -88,4 +89,16 @@ struct ReadMap ReadWorld(char worldname[50]){
   fread(&readmap,sizeof(readmap),1,file);
   fclose(file);
   return readmap;
+}
+void SaveWorld(struct Pos pos,struct Map map,char worldname[50]){
+  printf("Saving World");
+  struct ReadMap readmap = {map,pos,worldname};
+  /*createWorld(pos,map,worldname);*/
+  FILE * file;
+  strcat(SAVES,worldname);
+  strcat(SAVES,data);
+  file = fopen(SAVES,"w+");
+  fwrite(&readmap,sizeof(readmap),1,file);
+  fclose(file);
+  exit(0);
 }

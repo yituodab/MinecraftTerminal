@@ -20,5 +20,14 @@ int main(void){
     pos = move(input,WINDOW_HEIGHT,pos,MAP_SIZE,map);
     map = demolishBlock(input,pos,map);
   	render(pos.minx,pos.x,pos.y,WINDOW_HEIGHT,map);
+    if(input == 109){
+      //char * Name = readmap.worldname;
+      //char worldName[50] = {readmap.worldname};
+      //sprintf(worldName,"%s",Name);
+      printf("%s",readmap.worldname);
+      readmap.map = map;
+      readmap.pos = pos;
+      SaveWorld(pos,map,readmap.worldname);
+    }
   }
 }
