@@ -1,4 +1,5 @@
-#!/bin/sh
+#!/bin/bash
 gcc -fPIC *.c
-JSON = "build.json"
-JSON_DATA = ${echo "JSON" | awk -F':' '{'}
+JSON=$(cat build.json)
+MODID=$(echo $JSON | jq -r ".modid")
+VERSION=$(echo $JSON | jq -r ".version")

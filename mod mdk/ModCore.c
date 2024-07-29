@@ -1,4 +1,8 @@
-#!/bin/sh
-gcc -fPIC *.c
-JSON = "build.json"
-JSON_DATA = ${echo "JSON" | awk -F':' '{'}
+#include <stdio.h>
+#include "test.c"
+void print(){
+  printf("sb");
+}
+int main(){
+  print();
+}
