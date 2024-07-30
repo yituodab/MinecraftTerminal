@@ -13,7 +13,7 @@ char * minecraftTerminal = "                    TERMINAL EDTION\033[0m";
   printf("%s\n",minecraft3);
   printf("%s\n",minecraftTerminal);
 }*/
-struct ReadMap start(void){
+struct ReadMap __attribute__((weak)) start(void){
   char * worldlist[100+3];
   struct ReadMap readmap;
   struct Pos pos = {1,1,1,10};

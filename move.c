@@ -8,7 +8,7 @@
   int minx;
   int miny;
 };*/
-struct Pos move(int input,int window_height,struct Pos pos,int map_size,struct Map map){
+struct Pos __attribute__((weak)) move(int input,int window_height,struct Pos pos,int map_size,struct Map map){
   //Move
   int a = 97;
   int d = 100;
@@ -46,7 +46,7 @@ struct Pos move(int input,int window_height,struct Pos pos,int map_size,struct M
   }
   return pos;
 }
-struct Map demolishBlock(int input,struct Pos pos,struct Map map){
+struct Map __attribute__((weak)) demolishBlock(int input,struct Pos pos,struct Map map){
   int w = 119;
   int s = 115;
   int q = 113;

@@ -1,13 +1,18 @@
 #include "Render.c"
 #include "move.c"
 #include "Start.c"
+//#include "ModCore.c"
 //#include "Command.c"
 #ifdef _WIN32
 char * command = "cls";
 #else
 char * command = "clear";
 #endif
+__attribute__((weak)) void realmain();
 int main(void){
+  realmain();
+}
+__attribute__((weak)) void realmain(){
   system(command);
   struct ReadMap readmap = start();
   struct Pos pos = readmap.pos;
@@ -24,10 +29,10 @@ int main(void){
       //char * Name = readmap.worldname;
       //char worldName[50] = {readmap.worldname};
       //sprintf(worldName,"%s",Name);
-      printf("%s",readmap.worldname);
+      /*printf("%s",readmap.worldname);
       readmap.map = map;
       readmap.pos = pos;
-      SaveWorld(pos,map,readmap.worldname);
+      SaveWorld(pos,map,readmap.worldname);*/
     }
   }
 }

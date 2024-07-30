@@ -42,7 +42,7 @@ struct ReadMap{
   struct Pos pos;
   char worldname[50];
 };
-struct Map addWorld(int height,int seed){
+struct Map __attribute__((weak)) addWorld(int height,int seed){
   struct Map map;
   srand(seed);
   for(int i = 1;i<=MAP_SIZE*WINDOW_HEIGHT;i++){
@@ -67,7 +67,7 @@ struct Map addWorld(int height,int seed){
   }
   return map;
 }
-void createWorld(struct Pos pos,struct Map map,char worldname[50]){
+void __attribute__((weak)) createWorld(struct Pos pos,struct Map map,char worldname[50]){
   struct ReadMap readmap = {map,pos,worldname};
   FILE * File;
   strcat(SAVES,worldname);
@@ -79,7 +79,7 @@ void createWorld(struct Pos pos,struct Map map,char worldname[50]){
   fwrite(&readmap,sizeof(readmap),1,File);
   fclose(File);
 }
-struct ReadMap ReadWorld(char worldname[50]){
+__attribute__((weak)) struct ReadMap ReadWorld(char worldname[50]){
   struct ReadMap readmap;
   FILE * file;
   strcat(SAVES,worldname);
@@ -90,7 +90,7 @@ struct ReadMap ReadWorld(char worldname[50]){
   fclose(file);
   return readmap;
 }
-void SaveWorld(struct Pos pos,struct Map map,char worldname[50]){
+void __attribute__((weak)) SaveWorld(struct Pos pos,struct Map map,char worldname[50]){
   printf("Saving World");
   struct ReadMap readmap = {map,pos,worldname};
   /*createWorld(pos,map,worldname);*/
