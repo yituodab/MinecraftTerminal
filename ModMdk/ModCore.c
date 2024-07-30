@@ -8,7 +8,8 @@ int main(){
 }*/
 int main(){}
 void modloader(){
-
+  void* handle = dlopen("mods/*.so", RTLD_LAZY);
+  dlclose(handle);
 }
 void realmain(void){
   printf("scess");

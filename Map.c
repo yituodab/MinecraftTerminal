@@ -4,6 +4,7 @@
 #include <math.h>
 #include <unistd.h>
 #include <stdio.h>
+#include "BolinNoise.c"
 #include <string.h>
 #define MAP_SIZE 1100
 #define WINDOW_HEIGHT 10
@@ -28,7 +29,8 @@ char * blockTypes[10]={
   "气",
   "石",
   "土",
-  "铁"
+  "铁",
+  "草"
 };
 struct block{
 	bool noAir;
@@ -45,13 +47,43 @@ struct ReadMap{
 struct Map __attribute__((weak)) addWorld(int height,int seed){
   struct Map map;
   srand(seed);
-  for(int i = 1;i<=MAP_SIZE*WINDOW_HEIGHT;i++){
-    printf("Loading Map...\r");
-    int x = rand()%MAP_SIZE+1;
+  printf("Loading World...\n");
+  /*for(int i = 1;i<=MAP_SIZE;i++){
+    printf("%d%%\r",(int)i/MAP_SIZE);
+    int Random = (int)(WINDOW_HEIGHT-(Make2dNoise(i,WINDOW_HEIGHT)%100));//+(WINDOW_HEIGHT-height);
+    for(int y = Random;y<=WINDOW_HEIGHT;y++){
+      map.map[i][y].noAir = true;
+      if(y>=5)map.map[i][y].type = 1;
+      else map.map[i][y].type = 2;
+    }*/
+    /*int x = rand()%MAP_SIZE+1;
     int y = (WINDOW_HEIGHT-height)+abs((rand()%height+0)-(rand()%height+0));
     map.map[x][y].noAir = true;
     if(y>=5)map.map[x][y].type = 1;
-    else map.map[x][y].type = 2;
+    else map.map[x][y].type = 2;*/
+  for (int x = 0; x < MAP_SIZE; x++){
+    printf("%d%%\r",(int)x/MAP_SIZE);
+    double Height = Make2dNoise((x * MAP_SIZE + x + seed), seed);// * heightMult + heightAddition;
+    for (int y = 0; y < height; y++){
+      double v = Make2dNoise((x * MAP_SIZE + x + seed), (y + seed));
+      if (y < Height){//this will be used to generate cave
+        if(v < 0.2f && y < WINDOW_HEIGHT-height){
+          map.map[x][y].noAir = false;
+        }
+        else
+        {
+          map.map[x][y].type = 1;
+        }
+      }
+      else if(y < Height + 1)
+        {
+          map.map[x][y].type = 4;
+        }
+        else {
+          map.map[x][y].noAir = false;
+        }
+      }
+  	
   }
   for(int p = 1;p<=100;p++){
     int px = rand()%MAP_SIZE+1;
@@ -80,6 +112,7 @@ void __attribute__((weak)) createWorld(struct Pos pos,struct Map map,char worldn
   fclose(File);
 }
 __attribute__((weak)) struct ReadMap ReadWorld(char worldname[50]){
+  printf("Loading World...\n");
   struct ReadMap readmap;
   FILE * file;
   strcat(SAVES,worldname);
