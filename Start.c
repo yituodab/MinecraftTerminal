@@ -50,6 +50,7 @@ struct ReadMap __attribute__((weak)) start(void){
       struct Map map = addWorld(7,seed);
       createWorld(pos,map,Worldname);
       struct ReadMap ReadmaP = {map,pos,Worldname};
+      return ReadmaP;
       /*readmap.map = map;
       readmap.pos = pos;
       readmap.worldname = Worldname;
