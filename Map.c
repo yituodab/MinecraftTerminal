@@ -23,14 +23,14 @@ struct Pos{
   int x;
   int y;
   int minx;
-  int mint;
+  int miny;
 };
 char * blockTypes[10]={
   "气",
-  "石",
-  "土",
-  "铁",
-  "草"
+  "石",//1
+  "土",//2
+  "铁",//3
+  "草"//4
 };
 struct block{
 	bool noAir;
@@ -48,20 +48,29 @@ struct Map __attribute__((weak)) addWorld(int height,int seed){
   struct Map map;
   srand(seed);
   printf("Loading World...\n");
-  /*for(int i = 1;i<=MAP_SIZE;i++){
+  int ly;
+  for(int i = 1;i<=MAP_SIZE;i++){
     printf("%d%%\r",(int)i/MAP_SIZE);
-    int Random = (int)(WINDOW_HEIGHT-(Make2dNoise(i,WINDOW_HEIGHT)%100));//+(WINDOW_HEIGHT-height);
+    /*int Random = (int)(WINDOW_HEIGHT-(Make2dNoise(i,WINDOW_HEIGHT)%100));//+(WINDOW_HEIGHT-height);
     for(int y = Random;y<=WINDOW_HEIGHT;y++){
       map.map[i][y].noAir = true;
       if(y>=5)map.map[i][y].type = 1;
       else map.map[i][y].type = 2;
     }*/
-    /*int x = rand()%MAP_SIZE+1;
-    int y = (WINDOW_HEIGHT-height)+abs((rand()%height+0)-(rand()%height+0));
-    map.map[x][y].noAir = true;
-    if(y>=5)map.map[x][y].type = 1;
-    else map.map[x][y].type = 2;*/
-  for (int x = 0; x < MAP_SIZE; x++){
+    int x = i;
+    int y = WINDOW_HEIGHT-abs((rand()%5+0)-(rand()%5+0))-2;
+    if(i == 1)ly = y;
+    if(i != 1){
+      y = (int)((ly + y) / 2);
+      ly = y;
+    }
+    for(int my = y;y<=WINDOW_HEIGHT;y++){
+      map.map[x][y].noAir = true;
+      if(y>=5)map.map[x][y].type = 1;
+      else map.map[x][y].type = 2;
+    }
+  }
+  /*for (int x = 0; x < MAP_SIZE; x++){
     printf("%d%%\r",(int)x/MAP_SIZE);
     double Height = Make2dNoise((x * MAP_SIZE + x + seed), seed);// * heightMult + heightAddition;
     for (int y = 0; y < height; y++){
@@ -84,7 +93,7 @@ struct Map __attribute__((weak)) addWorld(int height,int seed){
         }
       }
   	
-  }
+  }*/
   for(int p = 1;p<=100;p++){
     int px = rand()%MAP_SIZE+1;
     int py = rand()%WINDOW_HEIGHT+(WINDOW_HEIGHT-height);
@@ -106,7 +115,7 @@ void __attribute__((weak)) createWorld(struct Pos pos,struct Map map,char worldn
   strcat(SAVES,data);
   strcat(Mkdir,worldname);
   if(access("saves",F_OK) == -1)system("mkdir saves");
-  system(Mkdir);
+  if(access(SAVES,F_OK) == -1)system(Mkdir);
   File = fopen(SAVES,"w+");
   fwrite(&readmap,sizeof(readmap),1,File);
   fclose(File);

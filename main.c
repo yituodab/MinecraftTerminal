@@ -1,5 +1,5 @@
 #include "Render.c"
-#include "move.c"
+//#include "Player.c"
 #include "Start.c"
 //#include "ModCore.c"
 //#include "Command.c"
@@ -14,17 +14,20 @@ int main(void){
 }
 __attribute__((weak)) void realmain(){
   system(command);
+  Inventory inventory;
   struct ReadMap readmap = start();
   struct Pos pos = readmap.pos;
   struct Map map = readmap.map;
+  Player player = {pos,{{pos.x,pos.y},20},inventory};
   //struct Command command = {pos,map};
   int input;
   for(;;input=getchar()){
     //RunCommand(input,command);
     system(command);
-    pos = move(input,WINDOW_HEIGHT,pos,MAP_SIZE,map);
-    map = demolishBlock(input,pos,map);
-  	render(pos.minx,pos.x,pos.y,WINDOW_HEIGHT,map);
+    player.pos = move(input,WINDOW_HEIGHT,player.pos,MAP_SIZE,map);
+    player = Gravity(player,map);
+    map = demolishBlock(input,player.pos,map);
+  	render(player.pos.minx,player.pos.x,player.pos.y,WINDOW_HEIGHT,map,player);
     if(input == 109){
       //char * Name = readmap.worldname;
       //char worldName[50] = {readmap.worldname};
@@ -33,6 +36,7 @@ __attribute__((weak)) void realmain(){
       readmap.map = map;
       readmap.pos = pos;
       SaveWorld(pos,map,readmap.worldname);*/
+      createWorld(player.pos,map,readmap.worldname);
     }
   }
 }

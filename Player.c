@@ -1,7 +1,15 @@
 //#include "conio.h/conio.h"
+#include "Inventory.c"
+#include "Entity.c"
 #ifndef MAP
 #include "Map.c"
 #endif
+struct player{
+  struct Pos pos;
+  Entity entity;
+  Inventory inventory;
+};
+typedef struct player Player;
 /*struct Pos{
   int x;
   int y;
@@ -34,17 +42,22 @@ struct Pos __attribute__((weak)) move(int input,int window_height,struct Pos pos
       pos.x += 1;
       pos.y -= 1;
     }
-    if(pos.x > window_height && (window_height + pos.minx)-pos.x <= 2){
+    if(pos.x > window_height-1 && (window_height + pos.minx)-pos.x <= 2){
       pos.minx += 1;
     }
   }
-  int j = 0;
-  while(j<window_height){
-    if(!map.map[pos.x][pos.y+1].noAir && pos.y < window_height)
-    pos.y += 1;
-    j++;
-  }
   return pos;
+}
+Player Gravity(Player player,struct Map map){
+  float height = 0;
+  while(!map.map[player.pos.x][player.pos.y+1].noAir && player.pos.y < WINDOW_HEIGHT){
+    player.pos.y += 1;
+    height++;
+  }
+  if(height >=3){
+    player.entity.health -= height*0.5;
+  }
+  return player;
 }
 struct Map __attribute__((weak)) demolishBlock(int input,struct Pos pos,struct Map map){
   int w = 119;
