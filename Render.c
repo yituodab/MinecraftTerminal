@@ -27,4 +27,12 @@ void __attribute__((weak)) render(int minx,int x,int y,int window_height,struct 
     printf("--");
   }
   printf("\n");
+  for(int in = 1;in<=9;in++){
+    printf("| |");
+  }
+  printf("\n");
+  for(int l = 1;l<=9;l++){
+    printf("---");
+  }
+  printf("\n");
 }

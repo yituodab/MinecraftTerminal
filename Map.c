@@ -27,10 +27,10 @@ struct Pos{
 };
 char * blockTypes[10]={
   "气",
-  "石",//1
-  "土",//2
-  "铁",//3
-  "草"//4
+  "\033[90m石\033[0m",//2
+  "土",
+  "\033[33m铁\033[0m",//3
+  "\033[32m草\033[0m"//4
 };
 struct block{
 	bool noAir;
@@ -46,7 +46,7 @@ struct ReadMap{
 };
 struct Map __attribute__((weak)) addWorld(int height,int seed){
   struct Map map;
-  srand(seed);
+  srand(seed*seed);
   printf("Loading World...\n");
   int ly;
   for(int i = 1;i<=MAP_SIZE;i++){
@@ -64,10 +64,11 @@ struct Map __attribute__((weak)) addWorld(int height,int seed){
       y = (int)((ly + y) / 2);
       ly = y;
     }
-    for(int my = y;my<=WINDOW_HEIGHT;my++){
-      map.map[x][my].noAir = true;
-      if(my <= y-2)map.map[x][my].type = 1;
-      else map.map[x][my].type = 2;
+    for(;y<=WINDOW_HEIGHT;y++){
+      map.map[x][y].noAir = true;
+      if(map.map[x][y-3].noAir)map.map[x][y].type = 1;
+      else if(map.map[x][y-1].noAir == false)map.map[x][y].type = 4;
+      else map.map[x][y].type = 2;
     }
   }
   /*for (int x = 0; x < MAP_SIZE; x++){

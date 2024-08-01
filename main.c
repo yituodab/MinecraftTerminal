@@ -1,3 +1,4 @@
+#include "getch.h"
 #include "Render.c"
 //#include "Player.c"
 #include "Start.c"
@@ -21,10 +22,13 @@ __attribute__((weak)) void realmain(){
   Player player = {pos,{{pos.x,pos.y},20},inventory};
   //struct Command command = {pos,map};
   int input;
-  for(;;input=getchar()){
+  for(;;){
     //RunCommand(input,command);
     system(command);
-    player.pos = move(input,WINDOW_HEIGHT,player.pos,MAP_SIZE,map);
+    if(kbhit()){
+      input = getch();
+      player.pos = move(input,WINDOW_HEIGHT,player.pos,MAP_SIZE,map);
+    }
     player = Gravity(player,map);
     map = demolishBlock(input,player.pos,map);
   	render(player.pos.minx,player.pos.x,player.pos.y,WINDOW_HEIGHT,map,player);

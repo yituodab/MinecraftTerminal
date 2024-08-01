@@ -1,7 +1,7 @@
 saves
 git.sh
 *.i
-*.h
 a.out
 *.cs
 *.cpp
+mc
