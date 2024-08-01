@@ -1,4 +1,8 @@
+#ifdef _WIN32
+#include <conio.h>
+#else
 #include "getch.h"
+#endif
 #include "Render.c"
 //#include "Player.c"
 #include "Start.c"
