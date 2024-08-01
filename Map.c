@@ -64,10 +64,10 @@ struct Map __attribute__((weak)) addWorld(int height,int seed){
       y = (int)((ly + y) / 2);
       ly = y;
     }
-    for(int my = y;y<=WINDOW_HEIGHT;y++){
-      map.map[x][y].noAir = true;
-      if(y>=5)map.map[x][y].type = 1;
-      else map.map[x][y].type = 2;
+    for(int my = y;my<=WINDOW_HEIGHT;my++){
+      map.map[x][my].noAir = true;
+      if(my <= y-2)map.map[x][my].type = 1;
+      else map.map[x][my].type = 2;
     }
   }
   /*for (int x = 0; x < MAP_SIZE; x++){
