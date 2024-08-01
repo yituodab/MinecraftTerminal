@@ -5,7 +5,7 @@
 extern "C" {
 #endif
 
-#include <features.h>
+#include "features.h"
 
 #define __NEED_pid_t
 #define __NEED_struct_winsize
