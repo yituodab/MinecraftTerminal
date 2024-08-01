@@ -10,7 +10,7 @@ extern "C" {
 #define __NEED_pid_t
 #define __NEED_struct_winsize
 
-#include <bits/alltypes.h>
+#include "bits/alltypes.h"
 
 typedef unsigned char cc_t;
 typedef unsigned int speed_t;
