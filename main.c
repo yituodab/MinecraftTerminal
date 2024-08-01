@@ -26,7 +26,7 @@ __attribute__((weak)) void realmain(){
   Player player = {pos,{{pos.x,pos.y},20},inventory};
   //struct Command command = {pos,map};
   int input;
-  for(;;){
+  while(true){
     //RunCommand(input,command);
     system(command);
     if(kbhit()){
