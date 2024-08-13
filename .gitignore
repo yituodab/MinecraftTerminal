@@ -1,6 +1,7 @@
-saves
+saves/
 git.sh
 a.out
 *.cs
 *.cpp
 mc
+.vscode/

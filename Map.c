@@ -110,7 +110,8 @@ struct Map __attribute__((weak)) addWorld(int height,int seed){
   return map;
 }
 void __attribute__((weak)) createWorld(struct Pos pos,struct Map map,char worldname[50]){
-  struct ReadMap readmap = {map,pos,worldname};
+  struct ReadMap readmap = {map,pos};
+  strcpy(readmap.worldname,worldname);
   FILE * File;
   strcat(SAVES,worldname);
   strcat(SAVES,data);
@@ -135,7 +136,8 @@ __attribute__((weak)) struct ReadMap ReadWorld(char worldname[50]){
 }
 void __attribute__((weak)) SaveWorld(struct Pos pos,struct Map map,char worldname[50]){
   printf("Saving World");
-  struct ReadMap readmap = {map,pos,worldname};
+  struct ReadMap readmap = {map,pos};
+  strcpy(readmap.worldname,worldname);
   /*createWorld(pos,map,worldname);*/
   FILE * file;
   strcat(SAVES,worldname);
