@@ -9,7 +9,7 @@ jobs:
           with:
             platform: x64
         - name: Build
-          run: gcc -std=c99 main.c -o Windows-x64.exe
+          run: gcc -std=c99 ./main.c -o Windows-x64.exe
     Windows-x86:
       runs-on: windows-latest
       steps:
@@ -18,7 +18,7 @@ jobs:
           with:
             platform: x86
         - name: Build
-          run: gcc -std=c99 main.c -o Windows-x86.exe
+          run: gcc -std=c99 ./main.c -o Windows-x86.exe
     Linux-x64:
       runs-on: ubuntu-latest
       steps: 
@@ -28,7 +28,7 @@ jobs:
             version: latest
             platform: x64
         - name: Build
-          run: gcc -std=c99 main.c -o Linux-x64.out
+          run: gcc -std=c99 ./main.c -o Linux-x64.out
     Linux-x86:
       runs-on: ubuntu-latest
       steps:
@@ -38,4 +38,4 @@ jobs:
             version: latest
             platform: x86
         - name: Build
-          run: gcc -std=c99 main.c -o Linux-x86.out
+          run: gcc -std=c99 ./main.c -o Linux-x86.out
